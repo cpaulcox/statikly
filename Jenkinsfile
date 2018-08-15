@@ -24,6 +24,8 @@ node {
 	stage('acceptance test') {
 	    echo '...'
 	}
+	
+	if (env.BRANCH_NAME == 'master') {
 	stage('release!') {
     	    echo "We are currently working on branch: ${env.BRANCH_NAME}"
 		
@@ -33,7 +35,10 @@ node {
                   env.PROPERTY_FILE = 'env.prod.properties';
 		  echo 'Releasing!'
                 break;
-                default: env.DEPLOYMENT_ENVIRONMENT = 'no_deploy';
+                default:
+		  env.DEPLOYMENT_ENVIRONMENT = 'no_deploy';
+		  echo 'Feature branch build no release'
             }
+	}
 	}
 }
