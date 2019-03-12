@@ -2,7 +2,7 @@ self.addEventListener('activate', function(event) {
     console.log("Ready for the demo");
 });
 
-var token = "my access token"
+token = "my access token"
 
 self.addEventListener('message', function(event) {
     var data = event.data;
