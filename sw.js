@@ -1,9 +1,11 @@
+basket_id = ""
 self.addEventListener('activate', function(event) {
     console.log("Ready for the demo");
+    basket_id = create_UUID();
 });
 
 token = "my access token"
-basket_id = "112233445566"
+
 
 self.addEventListener('message', function(event) {
     var data = event.data;
@@ -31,3 +33,14 @@ self.addEventListener('message', function(event) {
         })
     }
 });
+
+
+function create_UUID(){
+    var dt = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (dt + Math.random()*16)%16 | 0;
+        dt = Math.floor(dt/16);
+        return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+}
