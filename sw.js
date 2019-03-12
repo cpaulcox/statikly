@@ -3,6 +3,7 @@ self.addEventListener('activate', function(event) {
 });
 
 token = "my access token"
+basket_id = "112233445566"
 
 self.addEventListener('message', function(event) {
     var data = event.data;
@@ -13,6 +14,9 @@ self.addEventListener('message', function(event) {
         console.log("Responding to message from the Page: ", data.message);
         event.ports[0].postMessage({
             "message": "Hi, Page with..." + token
+        });
+        event.ports[0].postMessage({
+            "message": "basket id = " + basket_id
         });
     } else if (data.command == "broadcast") {
         console.log("Broadcasting to the clients");
