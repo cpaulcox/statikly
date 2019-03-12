@@ -29,6 +29,11 @@ self.addEventListener('message', function(event) {
                     "command": "broadcastOnRequest",
                     "message": "This is a broadcast on request from the SW"
                 });
+                client.postMessage({
+                    "command": "broadcastOnRequest",
+                    "message": "Broadcasting new basket with id = "+ basket_id
+                });
+                
             })
         })
     }
