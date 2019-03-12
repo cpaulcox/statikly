@@ -2,6 +2,8 @@ self.addEventListener('activate', function(event) {
     console.log("Ready for the demo");
 });
 
+var token = "my access token"
+
 self.addEventListener('message', function(event) {
     var data = event.data;
 
@@ -10,7 +12,7 @@ self.addEventListener('message', function(event) {
     } else if (data.command == "twoWayCommunication") {
         console.log("Responding to message from the Page: ", data.message);
         event.ports[0].postMessage({
-            "message": "Hi, Page"
+            "message": "Hi, Page" + token
         });
     } else if (data.command == "broadcast") {
         console.log("Broadcasting to the clients");
