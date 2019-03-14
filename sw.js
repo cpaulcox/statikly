@@ -59,7 +59,11 @@ self.addEventListener('fetch', event => {
        event.request.headers.get('accept').includes('text/html'))) {
     console.log('Handling fetch event for', event.request.url);
     event.respondWith(
-      fetch(event.request).catch(error => {
+      fetch(event.request)
+        .then(response => {
+        console.log('Response is', response);
+      })
+        .catch(error => {
         // The catch is only triggered if fetch() throws an exception, which will most likely
         // happen due to the server being unreachable.
         // If fetch() returns a valid HTTP response with an response code in the 4xx or 5xx
