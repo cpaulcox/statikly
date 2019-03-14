@@ -62,9 +62,9 @@ self.addEventListener('fetch', event => {
       fetch(event.request)
         .then(response => {
         console.log('Response is ', response);
-        console.log('Content type is' response.headers['Content-Type'])
+        console.log('Content type is', response.headers['Content-Type'])
         response.json().then(json => {
-            console.log(json)
+            console.log('JSON Body ', json)
         })
         return response;
       })
