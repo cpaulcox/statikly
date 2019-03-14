@@ -46,6 +46,7 @@ self.addEventListener('fetch', event => {
     
   console.log('Handling fetch event for', event.request.url);
   console.log('Request details', event.request);
+  console.log('Fetch event details', event);
     
     
   // We only want to call event.respondWith() if this is a navigation request
