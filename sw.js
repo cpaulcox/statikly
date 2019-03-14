@@ -62,6 +62,8 @@ self.addEventListener('fetch', event => {
       fetch(event.request)
         .then(response => {
         console.log('Response is', response);
+            
+        return response;
       })
         .catch(error => {
         // The catch is only triggered if fetch() throws an exception, which will most likely
