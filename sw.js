@@ -39,10 +39,13 @@ self.addEventListener('message', function(event) {
     }
 });
 
+
+// Intercepts all fetch traffic. 'fetch' is a predfined hook name.
 self.addEventListener('fetch', event => {
     
     
   console.log('Handling fetch event for', event.request.url);
+  console.log('Request details', event.request);
     
     
   // We only want to call event.respondWith() if this is a navigation request
