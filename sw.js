@@ -62,10 +62,14 @@ self.addEventListener('fetch', event => {
       fetch(event.request)
         .then(response => {
         console.log('Response is ', response);
-        console.log('Content type is', response.headers['Content-Type'])
-        response.json().then(json => {
-            console.log('JSON Body ', json)
-        })
+        console.log('Content type is', response.headers.get('Content-Type'))
+        if (response.headers.get('Content-Type') === 'application/json') {
+            var clone = response.clone() // Must clone as can only be used once and is returned to responWith
+            clone.json().then(json => {
+                console.log('JSON Body ', json)
+            })
+        }
+        
         return response;
       })
         .catch(error => {
