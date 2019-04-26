@@ -138,6 +138,14 @@ const googlePaymentDataRequest = {
     }
   }]
 }; 
+
+const applePayDataRequest = {
+        version: 3,
+        merchantIdentifier: "merchant.com.example",
+        merchantCapabilities: ["supports3DS", "supportsCredit", "supportsDebit"],
+        supportedNetworks: ["amex", "masterCard", "visa"],
+        countryCode: "US"
+};
   
 /**
  * Builds PaymentRequest with multiple shipping options, but does not show any
@@ -150,7 +158,9 @@ function initPaymentRequest() {
       'visa', 'mir'];
   let types = ['debit', 'credit', 'prepaid'];
   let supportedInstruments = [{supportedMethods: 'basic-card', data: {supportedNetworks: networks, supportedTypes: types}},
-                             {supportedMethods: 'https://google.com/pay', data: googlePaymentDataRequest}];
+                             {supportedMethods: 'https://google.com/pay', data: googlePaymentDataRequest},
+                             {supportedMethods: "https://apple.com/apple-pay", data: applePayDataRequest}
+                             ];
 
   let details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
