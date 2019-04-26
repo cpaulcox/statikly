@@ -119,10 +119,8 @@ function initPaymentRequest() {
   let networks = ['amex', 'diners', 'discover', 'jcb', 'mastercard', 'unionpay',
       'visa', 'mir'];
   let types = ['debit', 'credit', 'prepaid'];
-  let supportedInstruments = [{
-    supportedMethods: 'basic-card',
-    data: {supportedNetworks: networks, supportedTypes: types},
-  }];
+  let supportedInstruments = [{supportedMethods: 'basic-card', data: {supportedNetworks: networks, supportedTypes: types}},
+                             {supportedMethods: 'https://google.com/pay', data: googlePaymentDataRequest}];
 
   let details = {
     total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
@@ -298,6 +296,34 @@ if (window.PaymentRequest) {
 } else {
   ChromeSamples.setStatus('This browser does not support web payments');
 }
+        
+const googlePaymentDataRequest = {
+  environment: 'TEST',
+  apiVersion: 2,
+  apiVersionMinor: 0,
+  merchantInfo: {
+    // A merchant ID is available after approval by Google.
+    // @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
+    // merchantId: '01234567890123456789',
+    merchantName: 'Example Merchant'
+  },
+  allowedPaymentMethods: [{
+    type: 'CARD',
+    parameters: {
+      allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+      allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
+    },
+    tokenizationSpecification: {
+      type: 'PAYMENT_GATEWAY',
+      // Check with your payment gateway on the parameters to pass.
+      // @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
+      parameters: {
+        'gateway': 'example',
+        'gatewayMerchantId': 'exampleGatewayMerchantId'
+      }
+    }
+  }]
+};        
 </script>
     
   
