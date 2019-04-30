@@ -204,9 +204,11 @@ function initPaymentRequest() {
   if (request.canMakePayment) {
     request.canMakePayment().then(function(result) {
       if (result) {
-        onSuccess(request);
+        //onSuccess(request);
+        console.log("Payments supported")
       } else {
-        onFailure('Cannot make payment');
+        //onFailure('Cannot make payment');
+        console.log("Payments not supported")
       }
     }).catch(function(err) {
       onSuccess(request, err);
