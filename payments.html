@@ -201,6 +201,22 @@ function initPaymentRequest() {
 
   let request = new PaymentRequest(supportedInstruments, details, options);
 
+  if (request.canMakePayment) {
+    request.canMakePayment().then(function(result) {
+      if (result) {
+        onSuccess(request);
+      } else {
+        onFailure('Cannot make payment');
+      }
+    }).catch(function(err) {
+      onSuccess(request, err);
+    });
+  } else {
+    onSuccess(
+        request, 'This browser does not support "can make payment" query');
+  }
+  
+  
   request.addEventListener('shippingaddresschange', function(evt) {
     evt.updateWith(Promise.resolve(details));
   });
