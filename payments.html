@@ -110,6 +110,9 @@ limitations under the License.
   
     
 <script>
+
+const currency = 'GBP'
+const country = 'GB'
   
 const googlePaymentDataRequest = {
   environment: 'TEST',
@@ -144,7 +147,7 @@ const applePayDataRequest = {
         merchantIdentifier: "merchant.com.example",
         merchantCapabilities: ["supports3DS", "supportsCredit", "supportsDebit"],
         supportedNetworks: ["amex", "masterCard", "visa"],
-        countryCode: "US"
+        countryCode: country
 };
   
 /**
@@ -163,32 +166,32 @@ function initPaymentRequest() {
                              ];
 
   let details = {
-    total: {label: 'Donation', amount: {currency: 'USD', value: '55.00'}},
+    total: {label: 'Basket total', amount: {currency: 'USD', value: '55.00'}},
     displayItems: [
       {
-        label: 'Original donation amount',
-        amount: {currency: 'USD', value: '65.00'},
+        label: 'A bag of spanners',
+        amount: {currency: currency, value: '65.00'},
       },
       {
         label: 'Friends and family discount',
-        amount: {currency: 'USD', value: '-10.00'},
+        amount: {currency: currency, value: '-10.00'},
       },
       {
         label: 'Standard shipping',
-        amount: {currency: 'USD', value: '0.00'},
+        amount: {currency: currency, value: '0.00'},
       },
     ],
     shippingOptions: [
       {
         id: 'standard',
         label: 'Standard shipping',
-        amount: {currency: 'USD', value: '0.00'},
+        amount: {currency: currency, value: '0.00'},
         selected: true,
       },
       {
         id: 'express',
         label: 'Express shipping',
-        amount: {currency: 'USD', value: '12.00'},
+        amount: {currency: currency, value: '12.00'},
       },
     ],
   };
@@ -540,7 +543,7 @@ if (window.PaymentRequest) {
 
 
 
-    
+    <!--
     <script>
       /* jshint ignore:start */
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -551,5 +554,6 @@ if (window.PaymentRequest) {
       ga('send', 'pageview');
       /* jshint ignore:end */
     </script>
+-->
   </body>
 </html>
