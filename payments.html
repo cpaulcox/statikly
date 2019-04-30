@@ -222,7 +222,7 @@ function onBuyClicked(request) {
   request.show().then(function(instrumentResponse) {
     
     // The instrumentResponse is a PaymentResponse log it!!!
-    console.log(instrumentResponse)
+    console.log(instrumentResponse)  // is this async? It seems to pick up later masked PAN
     
     sendPaymentToServer(instrumentResponse);
   })
@@ -293,8 +293,10 @@ function sendPaymentToServer(instrumentResponse) {
  */
 function instrumentToJsonString(instrument) {
   details = instrument.details;
-  details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12);
-  details.cardSecurityCode = '***';
+  
+  // Remove mask
+  //details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12); 
+  //details.cardSecurityCode = '***';
 
   return JSON.stringify({
     methodName: instrument.methodName,
