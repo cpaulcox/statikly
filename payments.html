@@ -220,6 +220,10 @@ function initPaymentRequest() {
  */
 function onBuyClicked(request) {
   request.show().then(function(instrumentResponse) {
+    
+    // The instrumentResponse is a PaymentResponse log it!!!
+    Console.log(instrumentResponse)
+    
     sendPaymentToServer(instrumentResponse);
   })
   .catch(function(err) {
