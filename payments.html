@@ -244,12 +244,12 @@ function onBuyClicked(request) {
     //console.log(instrumentResponse)  // is this async? It seems to pick up later masked PAN
     
     // Dispatch to different endpoints based on payment method
-    switch(instrument.methodName) {
+    switch(instrumentResponse.methodName) {
       case 'basic-card':
         // Remove mask
         //details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12); 
         //details.cardSecurityCode = '***';
-        console.log(instrument)  // log PaymentResponse
+        console.log(instrumentResponse)  // log PaymentResponse
         sendPaymentToServer(instrumentResponse);
       break;
     case 'https://apple.com/apple-pay':
