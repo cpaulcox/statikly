@@ -243,7 +243,22 @@ function onBuyClicked(request) {
     // The instrumentResponse is a PaymentResponse log it!!!
     //console.log(instrumentResponse)  // is this async? It seems to pick up later masked PAN
     
-    sendPaymentToServer(instrumentResponse);
+    // Dispatch to different endpoints based on payment method
+    switch(instrument.methodName) {
+      case 'basic-card':
+        // Remove mask
+        //details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12); 
+        //details.cardSecurityCode = '***';
+        console.log(instrument)  // log PaymentResponse
+        sendPaymentToServer(instrumentResponse);
+      break;
+    case 'https://apple.com/apple-pay':
+        sendPaymentToServer(instrumentResponse);
+    break;
+    default:
+      // code block
+    }
+    
   })
   .catch(function(err) {
     ChromeSamples.setStatus(err);
@@ -313,19 +328,9 @@ function sendPaymentToServer(instrumentResponse) {
 function instrumentToJsonString(instrument) {
   details = instrument.details;
   
-  switch(instrument.methodName) {
-  case 'basic-card':
-    // Remove mask
+   // Remove mask
     //details.cardNumber = 'XXXX-XXXX-XXXX-' + details.cardNumber.substr(12); 
     //details.cardSecurityCode = '***';
-    console.log(instrument)  // log PaymentResponse
-    break;
-  case 'https://apple.com/apple-pay':
-    // code block
-    break;
-  default:
-    // code block
-  }
 
   return JSON.stringify({
     methodName: instrument.methodName,
