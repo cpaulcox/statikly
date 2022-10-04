@@ -9,9 +9,7 @@
 // Intercepts all fetch traffic.
 onfetch = (event) => { 
     
-  console.log('Handling fetch event for', event.request.url);
-  console.log('Request details', event.request);
-  console.log('Fetch event details', event);
+  console.log(`Fetch event ${event} for request ${event.request} at url ${event.request.url}`)
     
     
   // We only want to call event.respondWith() if this is a navigation request
@@ -20,18 +18,18 @@ onfetch = (event) => {
   // versions older than 49, so we need to include a less precise fallback,
   // which checks for a GET request with an Accept: text/html header.
   if (event.request.mode === 'navigate' ||
-      (event.request.method === 'GET' &&
-       event.request.headers.get('accept').includes('text/html'))) {
-    console.log('Handling fetch event for', event.request.url);
+      (event.request.method === 'GET' && event.request.headers.get('accept').includes('text/html'))) {
+
     event.respondWith(
       fetch(event.request)
         .then(response => {
-        console.log('Response is ', response);
-        console.log('Content type is', response.headers.get('Content-Type'))
+        
+        console.log(`Response is ${response} with content type ${response.headers.get('Content-Type')}`);
+
         if (response.headers.get('Content-Type').startsWith('application/json')) {
             var clone = response.clone() // Must clone as can only be used once and is returned to responWith
             clone.json().then(json => {
-                console.log('JSON Body ', json)
+                console.log(`JSON Body ${json}`)
             })
         }
         
