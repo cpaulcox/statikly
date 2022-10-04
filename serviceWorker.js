@@ -1,3 +1,13 @@
+// TODO
+// How to unregister/update service workers?
+// Isolation and closures - private methods?
+// cross tabs?
+// session expiry of access tokens?
+// switch on urls
+// url rewrites for various payment types?
+
+
+
 // Service worker lifecycle event handling
 
 // Fetch event handling

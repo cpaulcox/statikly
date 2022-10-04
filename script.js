@@ -1,7 +1,7 @@
 if (navigator.serviceWorker) {
     console.log("ServiceWorkers are supported");
 
-    navigator.serviceWorker.register('sw.js', {
+    navigator.serviceWorker.register('serviceWorker.js', {
             scope: './'
         })
         .then(function(reg) {
