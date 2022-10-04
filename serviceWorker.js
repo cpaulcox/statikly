@@ -10,6 +10,15 @@
 
 // Service worker lifecycle event handling
 
+oninstall = (event) => {
+  console.log(`sw::oninstall - ${event}`)
+}
+
+onactivate = (event) => {
+  console.log(`sw::onactivate - ${event}`)
+}
+
+
 // Fetch event handling
 
 // The fetch event is fired when the fetch() method is called.
@@ -19,7 +28,7 @@
 // Intercepts all fetch traffic.
 onfetch = (event) => { 
     
-  console.log(`Fetch event ${event} for request ${event.request} at url ${event.request.url}`)
+  console.log(`sw::onfetch - ${event} for request ${event.request} at url ${event.request.url}`)
     
     
   // We only want to call event.respondWith() if this is a navigation request
