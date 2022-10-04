@@ -70,7 +70,7 @@ onfetch = (event) => {
   // If there are any other fetch handlers registered, they will get a chance to call
   // event.respondWith(). If no fetch handlers call event.respondWith(), the request will be
   // handled by the browser as if there were no service worker involvement.
-});
+}
 
 
 basket_id = ""
